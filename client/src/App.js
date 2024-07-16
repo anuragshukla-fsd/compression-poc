@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import imageCompression from "browser-image-compression";
-import UploadFormCompressor from "./CompressorJs";
+const SERVER_URL = "https://compression.anurags.tech"
 
 const UploadForm = () => {
   const [file, setFile] = useState(null);
@@ -49,7 +49,7 @@ const UploadForm = () => {
       formData.append("thumbnail", imageOptions.thumbnail)
 
       const response = await axios.post(
-        "http://localhost:8000/api/upload",
+        `${SERVER_URL}/api/upload`,
         formData,
         {
           headers: {
@@ -125,14 +125,13 @@ const UploadForm = () => {
             <h3>{label}</h3>
             <img
               key={idx}
-              src={`http://localhost:8000/${url}`}
+              src={`${SERVER_URL}/${url}`}
               alt={`Uploaded ${idx}`}
               style={{ maxWidth: "200px", margin: "10px" }}
             />
           </div>
         ))}
       </div>
-      <UploadFormCompressor />
     </div>
   );
 };

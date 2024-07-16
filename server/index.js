@@ -14,8 +14,8 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 app.use(cors({
-	origin: 'http://localhost:3000',
-	methods: ['POST'],
+	origin: '*',
+	methods: ['GET','POST'],
 	allowedHeaders: ['Content-Type']
 	}));
 app.use(express.static(uploadDir));
