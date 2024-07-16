@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/compression-poc/static/js/main.19ea30b2.js",
+    "index.html": "/compression-poc/index.html",
+    "main.19ea30b2.js.map": "/compression-poc/static/js/main.19ea30b2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.19ea30b2.js"
+  ]
+}
