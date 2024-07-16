@@ -62,9 +62,7 @@ const UploadForm = () => {
 
       // Update state with uploaded images
       setUploadedImages(response.data);
-
       // Clear the file input
-      setFile(null);
     } catch (error) {
       console.error("Error uploading image", error);
     }
