@@ -52,14 +52,26 @@ app.post("/api/upload", upload.single("image"), async (req, res) => {
 			.webp({ quality: 80 })
 			.toFile(fullFilePath);
 
-		const thumbnailImage = await sharp(buffer)
+		let image = sharp(buffer);
+		const metadata = await image.metadata();
+		let { width, height } = metadata;
+		while (width > thumbSize || height > thumbSize) {
+			width = Math.ceil(width / 2);
+			height = Math.ceil(height / 2);
+			image = image.resize(width, height, { fit: "inside" });
+		}
+
+		const thumbnailImage = await image
 			.resize(thumbSize, thumbSize, { fit: "inside" })
-			.webp({ quality:80 })
-			.sharpen({
-					sigma: 1.2,
-					y3: 0.8,
+			.toFormat("jpg", {
+				// quality: 100,
+				// mozjpeg: true,
+				// chromaSubsampling: "4:4:4",
+				// lossless: true,
 			})
-			 // .toFormat("webp", { quality: 100, mozjpeg:true, chromaSubsampling:"4:4:4", lossless:true  })
+			.sharpen({
+				sigma: 1.2,
+			})
 			.toFile(thumbnailFilePath);
 
 		await sharp(buffer).toFile(originalFilePath);
